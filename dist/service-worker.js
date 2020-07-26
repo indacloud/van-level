@@ -81,7 +81,7 @@ if (!self.define) {
     });
   };
 }
-define("./service-worker.js",['./workbox-abaa1409'], function (workbox) { 'use strict';
+define("./service-worker.js",['./workbox-8307d4d4'], function (workbox) { 'use strict';
 
   /**
   * Welcome to your Workbox-powered service worker!
@@ -95,6 +95,9 @@ define("./service-worker.js",['./workbox-abaa1409'], function (workbox) { 'use s
   * See https://goo.gl/2aRDsh
   */
 
+  workbox.setCacheNameDetails({
+    prefix: "van-level"
+  });
   workbox.skipWaiting();
   workbox.clientsClaim();
   /**
@@ -104,9 +107,20 @@ define("./service-worker.js",['./workbox-abaa1409'], function (workbox) { 'use s
    */
 
   workbox.precacheAndRoute([{
+    "url": "index.html",
+    "revision": "8b00e53c1db01cf1570697850878ec9e"
+  }, {
     "url": "main.js",
-    "revision": "b52c824c640fb3d5019a3a9f8f117dee"
+    "revision": "72ec42993cdf313c1e62800bee6e019a"
   }], {});
+  workbox.registerRoute(/\.(?:png|jpg|jpeg|svg)$/, new workbox.CacheFirst({
+    "cacheName": "images",
+    plugins: []
+  }), 'GET');
+  workbox.registerRoute(/\.(?:js|css)$/, new workbox.CacheFirst({
+    "cacheName": "assets",
+    plugins: []
+  }), 'GET');
 
 });
 //# sourceMappingURL=service-worker.js.map

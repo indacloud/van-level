@@ -1,6 +1,4 @@
 import _ from 'lodash';
-import { registerServiceWorker } from './serviceworker';
-import { cache } from './cache';
 
 function component() {
 
@@ -11,7 +9,11 @@ function component() {
   return element;
 }
 
-registerServiceWorker().then(() => {
-  document.body.appendChild(component());
-  cache();
-});
+document.body.appendChild(component());
+
+if ('serviceWorker' in navigator) {
+  // Use the window load event to keep the page load performant
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js');
+  });
+}

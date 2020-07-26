@@ -33,6 +33,26 @@ module.exports = {
       // and not allow any straggling "old" SWs to hang around
       clientsClaim: true,
       skipWaiting: true,
+      cacheId: 'van-level',
+      runtimeCaching: [{
+        // Match any request that ends with .png, .jpg, .jpeg or .svg.
+        urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+        // Apply a cache-first strategy.
+        handler: 'CacheFirst',
+        options: {
+          // Use a custom cache name.
+          cacheName: 'images',
+        },
+      },
+      {
+
+        urlPattern: /\.(?:js|css)$/,
+        handler: 'CacheFirst',
+        options: {
+          // Use a custom cache name.
+          cacheName: 'assets',
+        },
+      }],
     }),
   ],
 };
