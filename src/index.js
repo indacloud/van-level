@@ -1,25 +1,17 @@
 import _ from 'lodash';
+import { registerServiceWorker } from './serviceworker';
+import { cache } from './cache';
 
 function component() {
 
   const element = document.createElement('div');
 
-  element.innerHTML = _.join(['Hello', 'webpack...'], ' ');
+  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
   return element;
 }
 
-function main() {
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service-worker.js').then(registration => {
-        console.log('SW registered: ', registration);
-        document.body.appendChild(component());
-      }).catch(registrationError => {
-        console.log('SW registration failed: ', registrationError);
-      });
-    });
-  }
-}
-
-main();
+registerServiceWorker().then(() => {
+  document.body.appendChild(component());
+  cache();
+});
