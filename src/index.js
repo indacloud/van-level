@@ -9,13 +9,17 @@ function component() {
   return element;
 }
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js').then(registration => {
-      console.log('SW registered: ', registration);
-      document.body.appendChild(component());
-    }).catch(registrationError => {
-      console.log('SW registration failed: ', registrationError);
+function main() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js').then(registration => {
+        console.log('SW registered: ', registration);
+        document.body.appendChild(component());
+      }).catch(registrationError => {
+        console.log('SW registration failed: ', registrationError);
+      });
     });
-  });
+  }
 }
+
+main();

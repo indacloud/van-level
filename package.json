@@ -4,7 +4,7 @@
   "description": "van-level",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "webpack",
     "start": "http-server dist",
     "watch": "webpack --watch"
@@ -12,6 +12,11 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/indacloud/van-level.git"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -21,9 +26,13 @@
   },
   "homepage": "https://github.com/indacloud/van-level#readme",
   "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "html-webpack-plugin": "^4.3.0",
     "http-server": "^0.12.3",
+    "jest": "^26.1.0",
     "webpack": "^4.44.0",
     "webpack-cli": "^3.3.12",
     "workbox-webpack-plugin": "^5.1.3"
